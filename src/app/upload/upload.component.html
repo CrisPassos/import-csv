@@ -1,0 +1,15 @@
+<input type="file" #csvReader name="Upload" id="txtCsv" (change)="uploadCsv($event)" accept=".csv">
+
+<table id="tarefa">
+  <thead>
+      <tr>
+        <th mat-header-cell *ngFor="let item of headers"> {{ item }}</th>
+      </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of tarefas">
+      <td mat-cell>{{ item.data }}</td>
+      <td mat-cell>{{ item.tarefa}}</td>
+    </tr>
+  </tbody>
+</table>
