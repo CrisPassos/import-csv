@@ -35,3 +35,30 @@ input {
   float:right;
   margin-bottom: 1rem;
 }
+
+.vermelho {
+  height: 15px;
+  width: 15px;
+  background-color: red;
+  border-radius: 50%;
+  display: inline-block;
+  margin-left: 0.5rem;
+}
+
+.amarelo {
+  height: 15px;
+  width: 15px;
+  background-color: yellow;
+  border-radius: 50%;
+  display: inline-block;
+  margin-left: 0.5rem;
+}
+
+.verde {
+  height: 15px;
+  width: 15px;
+  background-color: green;
+  border-radius: 50%;
+  display: inline-block;
+  margin-left: 0.5rem;
+}

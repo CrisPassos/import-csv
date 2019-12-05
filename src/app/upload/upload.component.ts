@@ -49,7 +49,8 @@ export class UploadComponent implements OnInit {
         // this.lines.paginator = this.paginator;
 
 
-        this.displayedColumns = ['status', 'tipoEvento', 'fundo', 'ativo', 'bla'];
+        this.displayedColumns =
+        ['status', 'porcentagem', 'possivelFP', 'grupo', 'sigla', 'ativo', 'posicao', 'qtd', 'vba', 'sla', 'cod'];
       };
 
       reader.onerror = () => {
@@ -70,10 +71,16 @@ export class UploadComponent implements OnInit {
         // const csvTarefa: Tarefa = new Tarefa();
         const csvTarefa: any = {};
         csvTarefa.status = curruntRecord[0].trim();
-        csvTarefa.tipo_evento = curruntRecord[1].trim();
-        csvTarefa.fundo = curruntRecord[2].trim();
-        csvTarefa.ativo = curruntRecord[3].trim();
-        csvTarefa.bla = curruntRecord[4].trim();
+        csvTarefa.porcentagem = curruntRecord[1].trim();
+        csvTarefa.possivelFP = curruntRecord[2].trim();
+        csvTarefa.grupo = curruntRecord[3].trim();
+        csvTarefa.sigla = curruntRecord[4].trim();
+        csvTarefa.ativo = curruntRecord[5].trim();
+        csvTarefa.posicao = curruntRecord[6].trim();
+        csvTarefa.qtd = curruntRecord[7].trim();
+        csvTarefa.vba = curruntRecord[8].trim();
+        csvTarefa.sla = curruntRecord[9].trim();
+        csvTarefa.cod = curruntRecord[10].trim();
         listCsv.push(csvTarefa);
       }
     }
