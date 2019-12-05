@@ -1,6 +1,6 @@
 import { Line } from '../line.model';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator, MatTableDataSource, MatPaginatorModule } from '@angular/material';
+import { MatPaginator, MatTableDataSource, MatPaginatorModule, MatSort } from '@angular/material';
 
 @Component({
   selector: 'app-upload',
@@ -10,6 +10,9 @@ import { MatPaginator, MatTableDataSource, MatPaginatorModule } from '@angular/m
 export class UploadComponent implements OnInit {
   @ViewChild('csvReader', null) csvReader: any;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
+
+
 
   displayedColumns: string[] =  [];
   // lines: Line[] = [];
@@ -42,6 +45,7 @@ export class UploadComponent implements OnInit {
 
         this.lines = this.getDataRecordsArrayFromCSVFile(csvRecordsArray, this.headers.length);
 
+        // this.lines = new MatTableDataSource(this.getDataRecordsArrayFromCSVFile(csvRecordsArray, this.headers.length));
         // this.lines.paginator = this.paginator;
 
 
