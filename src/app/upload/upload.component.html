@@ -1,15 +1,34 @@
 <input type="file" #csvReader name="Upload" id="txtCsv" (change)="uploadCsv($event)" accept=".csv">
 
-<table id="tarefa">
-  <thead>
-      <tr>
-        <th mat-header-cell *ngFor="let item of headers"> {{ item }}</th>
-      </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let item of tarefas">
-      <td mat-cell>{{ item.data }}</td>
-      <td mat-cell>{{ item.tarefa}}</td>
-    </tr>
-  </tbody>
-</table>
+<div *ngIf="lines.length > 0">
+  <table mat-table [dataSource]="lines" matSort class="mat-elevation-z8" >
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+      <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="tipoEvento">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Tipo do Evento </th>
+      <td mat-cell *matCellDef="let element"> {{element.tipo_evento}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="fundo">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Fundo </th>
+      <td mat-cell *matCellDef="let element"> {{element.fundo}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="ativo">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Ativo </th>
+      <td mat-cell *matCellDef="let element"> {{element.ativo}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="bla">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Blá </th>
+      <td mat-cell *matCellDef="let element"> {{element.bla}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <mat-paginator [pageSizeOptions]="[2, 10, 20]" showFirstLastButtons></mat-paginator>
+</div>

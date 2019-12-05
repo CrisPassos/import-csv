@@ -1,5 +1,6 @@
-import { Tarefa } from './../tarefa.model';
+import { Line } from '../line.model';
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator, MatTableDataSource, MatPaginatorModule } from '@angular/material';
 
 @Component({
   selector: 'app-upload',
@@ -8,8 +9,11 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 })
 export class UploadComponent implements OnInit {
   @ViewChild('csvReader', null) csvReader: any;
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
-  tarefas: Tarefa[] = [];
+  displayedColumns: string[] =  [];
+  // lines: Line[] = [];
+  lines: any[] = [];
   headers: any;
 
   constructor() { }
@@ -18,7 +22,6 @@ export class UploadComponent implements OnInit {
   }
 
   uploadCsv($event: any) {
-
     const text = [];
     const files = $event.srcElement.files;
 
@@ -33,7 +36,16 @@ export class UploadComponent implements OnInit {
         const csvRecordsArray = (csvData as string).split(/\r\n|\n/);
 
         this.headers = this.getHeaderArray(csvRecordsArray);
-        this.tarefas = this.getDataRecordsArrayFromCSVFile(csvRecordsArray, this.headers.length);
+        // TODO colocar o tipo de objeto
+        // this.lines = new MatTableDataSource<any>(
+          // this.getDataRecordsArrayFromCSVFile(csvRecordsArray, this.headers.length));
+
+        this.lines = this.getDataRecordsArrayFromCSVFile(csvRecordsArray, this.headers.length);
+
+        // this.lines.paginator = this.paginator;
+
+
+        this.displayedColumns = ['status', 'tipoEvento', 'fundo', 'ativo', 'bla'];
       };
 
       reader.onerror = () => {
@@ -45,26 +57,28 @@ export class UploadComponent implements OnInit {
     }
   }
 
-  getDataRecordsArrayFromCSVFile(csvRecordsArray: string[], headerLength: any): Tarefa[] {
+  getDataRecordsArrayFromCSVFile(csvRecordsArray: string[], headerLength: any): any[] {
     const listCsv = [];
-
     // tslint:disable-next-line: prefer-for-of
     for (let i = 1; i < csvRecordsArray.length; i++) {
-      const curruntRecord = (csvRecordsArray[i] as string).split(',');
+      const curruntRecord = (csvRecordsArray[i] as string).split(';');
       if (curruntRecord.length === headerLength) {
-        const csvTarefa: Tarefa = new Tarefa();
-        csvTarefa.data = curruntRecord[0].trim();
-        csvTarefa.tarefa = curruntRecord[1].trim();
+        // const csvTarefa: Tarefa = new Tarefa();
+        const csvTarefa: any = {};
+        csvTarefa.status = curruntRecord[0].trim();
+        csvTarefa.tipo_evento = curruntRecord[1].trim();
+        csvTarefa.fundo = curruntRecord[2].trim();
+        csvTarefa.ativo = curruntRecord[3].trim();
+        csvTarefa.bla = curruntRecord[4].trim();
         listCsv.push(csvTarefa);
       }
     }
-
     return listCsv;
   }
 
   getHeaderArray(csvRecordsArray: string[]) {
     console.log('header');
-    const headers = (csvRecordsArray[0] as string).split(',');
+    const headers = (csvRecordsArray[0] as string).split(';');
     console.log(headers);
     const headerArray = [];
 
@@ -82,7 +96,7 @@ export class UploadComponent implements OnInit {
 
   fileReset() {
     this.csvReader.nativeElement.value = '';
-    this.tarefas = [];
+    this.lines = [];
   }
 
 }
