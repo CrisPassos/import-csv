@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { MatPaginator, MatTableDataSource, MatSort } from '@angular/material';
 import { UploadService } from './upload.service';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-upload',
@@ -13,11 +14,13 @@ export class UploadComponent implements OnInit {
 
   displayedColumns: string[] =  [];
   result: any;
+  today: any;
 
   pageSize = 5;
   pageSizeOptions = [ 5, 10, 20, 30 ];
 
   constructor(public service: UploadService) {
+    setInterval(() => { this.today = Date.now()}, 1);
   }
 
   ngOnInit() {
@@ -37,7 +40,7 @@ export class UploadComponent implements OnInit {
     const listCsv = [];
 
     this.displayedColumns =
-    ['status', 'porcentagem', 'possivelFP', 'grupo', 'sigla', 'ativo', 'posicao', 'qtd', 'vba', 'sla', 'cod'];
+    ['status', 'porcentagem', 'possivelFP', 'gestor', 'grupo', 'sigla', 'ativo', 'qtd', 'vba', 'cod'];
 
     for (let i = 1; i < data.length; i++) {
       const curruntRecord = (data[i].FieldOne as string).split(';');
@@ -45,14 +48,13 @@ export class UploadComponent implements OnInit {
       csvTarefa.status = curruntRecord[0].trim();
       csvTarefa.porcentagem = curruntRecord[1].trim();
       csvTarefa.possivelFP = curruntRecord[2].trim();
-      csvTarefa.grupo = curruntRecord[3].trim();
-      csvTarefa.sigla = curruntRecord[4].trim();
-      csvTarefa.ativo = curruntRecord[5].trim();
-      csvTarefa.posicao = curruntRecord[6].trim();
-      csvTarefa.qtd = curruntRecord[7].trim();
-      csvTarefa.vba = curruntRecord[8].trim();
-      csvTarefa.sla = curruntRecord[9].trim();
-      csvTarefa.cod = curruntRecord[10].trim();
+      csvTarefa.grupo = curruntRecord[4].trim();
+      csvTarefa.sigla = curruntRecord[5].trim();
+      csvTarefa.ativo = curruntRecord[12].trim();
+      csvTarefa.qtd = curruntRecord[25].trim();
+      csvTarefa.vba = curruntRecord[13].trim();
+      csvTarefa.cod = curruntRecord[18].trim();
+      csvTarefa.gestor = curruntRecord[35].trim();
       listCsv.push(csvTarefa);
     }
     return listCsv;

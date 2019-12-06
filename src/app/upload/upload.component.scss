@@ -17,13 +17,26 @@ mat-card {
   margin-bottom: 1rem;
 }
 
+.left-side {
+  float:right;
+  margin-bottom: 1rem;
+}
+
+td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type, th.mat-header-cell:first-of-type {
+  padding-right: 24px;
+}
+
+td.mat-cell, td.mat-footer-cell, th.mat-header-cell {
+  padding-right: 24px;
+  padding-left: 24px;
+}
+
 .vermelho {
   height: 15px;
   width: 15px;
   background-color: red;
   border-radius: 50%;
   display: inline-block;
-  margin-left: 0.5rem;
 }
 
 .amarelo {
@@ -32,7 +45,6 @@ mat-card {
   background-color: yellow;
   border-radius: 50%;
   display: inline-block;
-  margin-left: 0.5rem;
 }
 
 .verde {
@@ -41,5 +53,4 @@ mat-card {
   background-color: green;
   border-radius: 50%;
   display: inline-block;
-  margin-left: 0.5rem;
 }
