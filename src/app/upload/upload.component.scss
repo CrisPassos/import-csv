@@ -12,26 +12,7 @@ table {
   width: 100%;
 }
 
-#tarefa td, #tarefa th {
-  border: 1px solid #ddd;
-  padding: 8px;
-  text-align: center;
-}
-
-#tarefa tr:nth-child(even){background-color: #f2f2f2;}
-
-#tarefa tr:hover {background-color: #ddd;}
-
-#tarefa th {
-  padding-top: 12px;
-  padding-bottom: 12px;
-  text-align: left;
-  background-color: mat-color($primary, default);
-  color: white;
-  text-align: center;
-}
-
-input {
+mat-card {
   float:right;
   margin-bottom: 1rem;
 }
